@@ -19,5 +19,16 @@ class TaskSeeder extends Seeder
             'description' => 'El mensajero del mensajero de dios',
             'user_id' => 1
         ]);
+
+        DB::table('tasks')->insert([
+            'title' => 'Tarea2',
+            'description' => 'No soy yo',
+            'user_id' => 1
+        ]);
+        DB::table('tasks')->insert([
+            'title' => 'Tarea3',
+            'description' => 'Es Pepe',
+            'user_id' => 1
+        ]);
     }
 }

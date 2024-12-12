@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model, Illuminate\Testing\Constraints\SoftDeletedInDatabase;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
 {
+    use SoftDeletes;
     /**
      * Get all of the comments for the Task
      *
@@ -25,6 +26,7 @@ class Task extends Model
 
     protected $fillable = [
         'title',
-        'description'
+        'description',
+        'user_id'
     ];
 }
