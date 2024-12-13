@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model, Illuminate\Testing\Constraints\SoftDeletedInDatabase;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Task extends Model
@@ -19,14 +20,23 @@ class Task extends Model
     *
     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
     */
-   public function user(): BelongsTo
-   {
-       return $this->belongsTo(User::class);
-   }
-
     protected $fillable = [
         'title',
         'description',
         'user_id'
     ];
+   public function user(): BelongsTo
+   {
+       return $this->belongsTo(User::class);
+   }
+
+    /**
+     * The roles that belong to the Task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function sharedWith(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'task_user')->withPivot('permission');
+    }
 }
