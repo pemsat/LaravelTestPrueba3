@@ -34,9 +34,11 @@ class TaskComponent extends Component
 
     public function getTask()
     {
-        $tasks = Auth::user()->tasks;
-        $shared = Auth::user()->sharedTasks()->get();
-        $this->tasks = $shared->merge($tasks);
+        // $tasks = Auth::user()->tasks;
+        // $shared = Auth::user()->sharedTasks()->get();
+        // $this->tasks = $shared->merge($tasks);
+        $this->tasks =  Auth::user()->sharedTasks()->get();
+        
     }
 
     public function clearFields()

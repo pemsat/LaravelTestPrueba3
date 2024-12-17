@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class TaskSeeder extends Seeder
 {
@@ -17,18 +17,22 @@ class TaskSeeder extends Seeder
         DB::table('tasks')->insert([
             'title' => 'Tarea1',
             'description' => 'El mensajero del mensajero de dios',
-            'user_id' => 1
         ]);
+        $user = User::find(1);
+        $user->sharedTasks()->attach(1, ['permission' => 'owner']);
 
         DB::table('tasks')->insert([
             'title' => 'Tarea2',
             'description' => 'No soy yo',
-            'user_id' => 1
         ]);
+        $user = User::find(1);
+        $user->sharedTasks()->attach(2, ['permission' => 'owner']);
+
         DB::table('tasks')->insert([
             'title' => 'Tarea3',
             'description' => 'Es Pepe',
-            'user_id' => 1
         ]);
+        $user = User::find(1);
+        $user->sharedTasks()->attach(3, ['permission' => 'owner']);
     }
 }

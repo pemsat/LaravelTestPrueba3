@@ -38,14 +38,14 @@
             </tr>
         </thead>
 
-        <tbody class="bg-grey-light flex flex-col items-center justify-between w-">
+        <tbody class="bg-grey-light flex flex-col items-center justify-between">
 
             @foreach ($tasks as $task)
                 <tr class="flex w-full mb-">
                     <td class="p-4 w-1/4">{{ $task->title }}</td>
                     <td class="p-4 w-1/4">{{ $task->description }}</td>
                     <td class="p-4 w-1/2">
-                        @if ((isset($task->pivot) && $task->pivot->permission == 'edit') || auth()->user()->id == $task->user_id)
+                        @if ((isset($task->pivot) && $task->pivot->permission == 'edit') || (isset($task->pivot) && $task->pivot->permission == 'owner'))
                             <button type="button"
                                 class="text-sm bg-blue-500 hover:bg-blue-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                                 wire:click="openCreateModal({{ $task }})">Editar</button>
@@ -56,6 +56,12 @@
                                 class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
                                 wire:click="deleteTask({{ $task }})"
                                 wire:confirm="¿Está seguro? esta acción no se puede deshacer">Borrar</button>
+                        @endif
+                        @if ($task->shared == 'true')
+                        <button type="button"
+                        class="text-sm bg-red-500 hover:bg-red-700 text-white py-1 px-2 rounded focus:outline-none focus:shadow-outline"
+                        wire:click=""
+                        >Quitar compartir</button>
                         @endif
 
                     </td>

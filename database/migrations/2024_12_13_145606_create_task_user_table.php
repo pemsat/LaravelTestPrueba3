@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('task_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->enum('permission', ['view', 'edit'])->default('view');
+            $table->enum('permission', ['view', 'edit','owner'])->default('view');
             $table->timestamps();
         });
     }
